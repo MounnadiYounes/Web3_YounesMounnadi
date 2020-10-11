@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Web3_YounesMounnadi:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>Web3_YounesMounnadi</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="Web3_YounesMounnadi-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Web3_YounesMounnadi:war exploded" />
+    </root>
+  </artifact>
+</component>
