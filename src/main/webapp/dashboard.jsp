@@ -14,8 +14,8 @@
             <jsp:param name="page" value="Dashboard"></jsp:param>
         </jsp:include>
 
-        <main>
             <div>
+                <main>
                 <c:choose>
                     <c:when test="${not empty user}">
                         <p>User id: ${user.userid}</p>
