@@ -9,21 +9,19 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<div id="container">
-    <div id="content">
+<div id="main">
         <jsp:include page="header.jsp">
             <jsp:param name="page" value="Delete account"></jsp:param>
         </jsp:include>
 
-        <main>
+        <div class="container">
             <p>Are you sure you want to change your password?</p>
             <br>
             <form method="POST" action="Controller?command=DeleteAccount">
                 <p><input type="submit" id="no" value="No, take me to the homepage!"></p>
                 <p><input type="submit" id="yes" name="yes" value="Yes, delete my account"></p>
             </form>
-        </main>
-    </div>
+        </div>
     <footer> &copy; Webontwikkeling 3, UC Leuven-Limburg</footer>
 </div>
 </body>

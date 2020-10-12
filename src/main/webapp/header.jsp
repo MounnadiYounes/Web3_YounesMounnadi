@@ -10,7 +10,7 @@
             <li ${param.page eq 'Register'?'class="active"':'class="notactive"'}><a href="Controller?command=Register">Register</a></li>
 
             <c:if test="${not empty user}">
-                <li ${param.page eq 'Dashboard'?'id="actual"':""}><a href="Controller?command=Dashboard">Dashboard</a></li>
+                <li ${param.page eq 'Dashboard'?'class="active"':'class="notactive"'}><a href="Controller?command=Dashboard">Dashboard</a></li>
             </c:if>
         </ul>
     </nav>

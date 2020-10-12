@@ -20,6 +20,17 @@
 }
 
 
+.alert-succes {
+    padding: 0.5em;
+    background-color: #4BB543;
+    border: 1px solid #000;
+    color: #ECECEC;
+    border-radius: 3px;
+    margin-bottom: 1em;
+    box-sizing: border-box;
+}
+
+
 /* dingen */
 p {
     margin-bottom: 1em;
@@ -85,21 +96,28 @@ p a {
     text-decoration: none;
 }
 
-ul.flex li a:hover {
+ul.flex li a.active:hover {
+    background-color: #7B25AA;
+    color: black;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+ul.flex li a.notactive:hover {
     background-color: #dddddd;
     color: black;
     border-radius: 5px;
     padding: 10px;
 }
 
-ul.flex li a.active {
-    background-color: green;
+ul.flex li.active {
+    color: white;
+    background-color: #7B25AA;
     border-radius: 5px;
     padding: 10px;
-    color: white;
 }
 
-.flex li a.notactive {
+ul.flex li.notactive {
     background-color: #f1f1f1;
     border-radius: 5px;
     padding: 10px;
