@@ -11,12 +11,12 @@
 <body>
 <div id="main">
         <jsp:include page="header.jsp">
-            <jsp:param name="page" value="People overview"></jsp:param>
+            <jsp:param name="page" value="User overview"></jsp:param>
         </jsp:include>
 
             <c:choose>
                 <c:when test="${people.size() <= 0}">
-                    <p id="error">De database is leeg.</p>
+                    <p id="error">No users in the database.</p>
                 </c:when>
                 <c:otherwise>
                     <table>
@@ -28,10 +28,18 @@
                         </tr>
                         <c:forEach var="person" items="${people}">
                             <tr>
-                                <td>${person.email}</td>
-                                <td id="${person.userid}">${person.userid}</td>
-                                <td>${person.firstName}</td>
-                                <td>${person.lastName}</td>
+                                <td><c:out value="${person.email}"/></td>
+                                <td id="<c:out value="${person.userid}"/>"><c:out value="${person.userid}"/></td>
+                                <td><c:out value="${person.firstName}"/></td>
+                                <td><c:out value="${person.lastName}"/></td>
+
+                                <c:if test="${user.userid eq 'admin'}">
+                                    <td>
+                                        <form method="POST" action="Controller?command=DeleteAccountConfirmation&userId=<c:out value="${person.userid}"/>">
+                                            <input type="image" id="deleteAccountButton" src="images/delete-button.svg" alt="Delete user submit">
+                                        </form>
+                                    </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                         <caption>Users Overview</caption>

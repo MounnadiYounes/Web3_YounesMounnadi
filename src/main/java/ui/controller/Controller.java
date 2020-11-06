@@ -1,6 +1,7 @@
 package ui.controller;
 
-import domain.db.PersonService;
+import domain.service.ContactService;
+import domain.service.PersonService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +13,9 @@ import java.io.IOException;
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private PersonService service = new PersonService();
-    private HandlerFactory handlerFactory = new HandlerFactory();
+    private final PersonService personService = new PersonService();
+    private final ContactService contactService = new ContactService();
+    private final HandlerFactory handlerFactory = new HandlerFactory();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
@@ -28,13 +30,11 @@ public class Controller extends HttpServlet {
         String destination = "index.jsp";
         if (command != null) {
             try {
-                RequestHandler handler = handlerFactory.getHandler(command, service);
+                RequestHandler handler = handlerFactory.getHandler(command, personService, contactService);
                 destination = handler.handleRequest(request, response);
             } catch (Exception e) {
-                if (e.getMessage() != null) {
-                    request.setAttribute("error", e.getMessage());
-                    destination = "error.jsp";
-                }
+                request.setAttribute("error", e.getMessage());
+                destination = "error.jsp";
             }
         }
         request.getRequestDispatcher(destination).forward(request, response);

@@ -14,11 +14,12 @@ public class Login extends RequestHandler {
 
         try {
             String userId = request.getParameter("userId").trim();
-            Person person = getService().get(userId);
+            Person person = service.get(userId);
 
-            if (person != null && person.isCorrectPassword(request.getParameter("password"))) {
+            if (person != null && person.isCorrectPassword(request.getParameter("password").trim())) {
                 person.setLastLoginDateTime();
                 person.incrementAmountOfTimesLoggedIn();
+                service.update(person);
 
                 HttpSession session = request.getSession();
                 session.setAttribute("user", person);
@@ -30,6 +31,6 @@ public class Login extends RequestHandler {
             request.setAttribute("error", e.getMessage());
         }
 
-        return "/Controller?command=Home";
+        return "Controller?command=Home";
     }
 }

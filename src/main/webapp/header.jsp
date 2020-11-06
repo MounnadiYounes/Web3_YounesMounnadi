@@ -6,10 +6,11 @@
         <ul class="flex">
                 <li class="drukletter notactive"><a href="Controller?command=Home">CTA</a></li>
             <li ${param.page eq 'Home'?'class="active"':'class="notactive"'}><a href="Controller?command=Home">Home</a></li>
-            <li ${param.page eq 'People overview'?'class="active"':'class="notactive"'}><a href="Controller?command=Overview">Overview</a></li>
+            <li ${param.page eq 'User overview'?'class="active"':'class="notactive"'}><a href="Controller?command=Overview">Overview</a></li>
             <li ${param.page eq 'Register'?'class="active"':'class="notactive"'}><a href="Controller?command=Register">Register</a></li>
 
             <c:if test="${not empty user}">
+                <li ${param.page eq 'Contacts overview'?'class="active"':'class="notactive"'}><a href="Controller?command=ContactsOverview">Contacts</a></li>
                 <li ${param.page eq 'Dashboard'?'class="active"':'class="notactive"'}><a href="Controller?command=Dashboard">Dashboard</a></li>
             </c:if>
         </ul>

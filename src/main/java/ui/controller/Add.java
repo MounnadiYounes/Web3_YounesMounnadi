@@ -24,7 +24,7 @@ public class Add extends RequestHandler {
         if (errors.size() == 0) {
             try {
                 service.add(person);
-                return "Controller?command=Overview";
+                return "Controller?command=UsersOverview";
             } catch (DbException e) {
                 errors.add(e.getMessage());
             }
@@ -76,7 +76,7 @@ public class Add extends RequestHandler {
     private void setPersonPassword(Person person, HttpServletRequest request, List<String> errors) {
         String password = request.getParameter("password").trim();
         try {
-            person.setPassword(password);
+            person.setPasswordHashed(password);
             request.setAttribute("passwordPrevious", password);
         } catch (Exception e) {
             errors.add(e.getMessage());
