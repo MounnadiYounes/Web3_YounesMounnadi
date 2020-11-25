@@ -1,4 +1,4 @@
-package domain.db.util;
+package util;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -25,7 +25,7 @@ public class DbConnectionService {
         try {
             dbConnection.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e);
         }
     }
 }

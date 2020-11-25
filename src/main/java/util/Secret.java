@@ -1,4 +1,4 @@
-package domain.db.util;
+package util;
 
 import java.util.Properties;
 

@@ -11,7 +11,6 @@
 </head>
 <body>
 <div id="main">
-	<main>
 		<jsp:include page="header.jsp">
 			<jsp:param name="page" value="Home"></jsp:param>
 		</jsp:include>
@@ -50,7 +49,6 @@
 					</div>
 				</c:otherwise>
 			</c:choose>
-	</main>
 	<footer>&copy; Webontwikkeling 3, UC Leuven-Limburg</footer>
 </div>
 </body>

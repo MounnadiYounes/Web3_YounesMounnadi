@@ -39,9 +39,7 @@
                 <p><input type="submit" id="signUp" value="Sign Up"></p>
             </form>
         </div>
-    <footer>
-        &copy; Webontwikkeling 3, UC Leuven-Limburg
-    </footer>
+    <footer>&copy; Webontwikkeling 3, UC Leuven-Limburg</footer>
 </div>
 </body>
 </html>

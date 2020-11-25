@@ -9,13 +9,11 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<div id="container">
-    <div id="content">
+<div id="main">
         <jsp:include page="header.jsp">
             <jsp:param name="page" value="Add contact"></jsp:param>
         </jsp:include>
 
-        <main>
             <c:if test="${not empty error}">
                 <div class="alert-danger">
                     <ul>
@@ -24,6 +22,7 @@
                 </div>
             </c:if>
 
+        <div id="container">
             <form method="POST"  action="Controller?command=AddContact" novalidate="novalidate">
                 <!-- novalidate in order to be able to run tests correctly -->
                 <p><label for="firstName">First name</label><input type="text" id="firstName" name="firstName" value="<c:out value="${firstNamePrevious}"/>" required></p>
@@ -34,8 +33,7 @@
                 <p><label for="email">Email</label><input type="email" id="email" name="email" value="<c:out value="${emailPrevious}"/>" required></p>
                 <p><input type="submit" id="addContact" value="Add contact"></p>
             </form>
-        </main>
-    </div>
+        </div>
     <footer> &copy; Webontwikkeling 3, UC Leuven-Limburg</footer>
 </div>
 </body>

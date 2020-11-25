@@ -1,6 +1,4 @@
-package domain.db.util;
-
-import java.util.Properties;
+package util;
 
 /*
 Create a class that extends this abstract class and name it Secret

@@ -1,19 +1,16 @@
 package ui.controller;
 
-import domain.db.ContactDBSQL;
-import domain.db.PersonDBSQL;
-import domain.service.ContactService;
-import domain.service.PersonService;
+import domain.service.ContactTracingService;
 
 public class HandlerFactory {
 
-    public RequestHandler getHandler(String handlerName, PersonService model, ContactService contactModel) {
+    public RequestHandler getHandler(String handlerName, ContactTracingService contactTracingService) {
         RequestHandler handler = null;
         try {
             Class handlerClass = Class.forName("ui.controller." + handlerName);
             Object handlerObject = handlerClass.getConstructor().newInstance();
             handler = (RequestHandler) handlerObject;
-            handler.setModel(model, contactModel);
+            handler.setModel(contactTracingService);
         } catch (Exception e) {
             throw new RuntimeException("This page doesn't exist!");
         }

@@ -1,5 +1,3 @@
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,24 +6,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class SeleniumWorksWellTest {
+import static org.junit.Assert.assertEquals;
 
+public class SeleniumWorksWellTest {
     private WebDriver driver;
 
     @Before
-    public void setUp() {
-        // pas aan indien nodig
-        //System.setProperty("webdriver.chrome.driver", "/Users/grjon/Desktop/web3/chromedriver");
-        // windows: gebruik dubbele \\ om pad aan te geven
-        // hint: zoek een werkende test op van web 2 maar houd er rekening mee dat Chrome wellicht een upgrade kreeg
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\youne\\Desktop\\Semester 1\\Webontwikkeling 3\\jars and files\\chromedriver.exe");
+    public void setUp() throws Exception {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\loren\\Google Drive\\Hoge school (UCLL)\\Server stuff\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("https://nl.wikipedia.org/wiki/Hoofdpagina");
     }
 
-
     @After
-    public void clean(){
+    public void clean() {
         driver.quit();
     }
 
@@ -45,7 +39,5 @@ public class SeleniumWorksWellTest {
         assertEquals("Selenium - Wikipedia", driver.getTitle());
 
         assertEquals("Selenium", driver.findElement(By.tagName("h1")).getText());
-
     }
-
 }

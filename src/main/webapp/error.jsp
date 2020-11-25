@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<div id="main">
+    <div id="main">
         <jsp:include page="header.jsp">
             <jsp:param name="page" value="Error"></jsp:param>
         </jsp:include>
@@ -17,8 +17,8 @@
         <main>
             <p>${error}</p>
         </main>
+
+        <footer>&copy; Webontwikkeling 3, UC Leuven-Limburg</footer>
     </div>
-    <footer> &copy; Webontwikkeling 3, UC Leuven-Limburg</footer>
-</div>
 </body>
 </html>

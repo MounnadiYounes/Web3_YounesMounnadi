@@ -7,27 +7,52 @@
 .alert-danger {
     padding: 0.5em;
     background-color: #f2dede;
-    border: 1px solid #b94a48;
+    border: 1px solid #000;
     color: #b94a48;
     border-radius: 3px;
-    width: 100%;
     margin-bottom: 1em;
     box-sizing: border-box;
 }
-
-.alert-danger ul {
-    list-style-type: none;
-}
-
 
 .alert-succes {
     padding: 0.5em;
     background-color: #4BB543;
     border: 1px solid #000;
-    color: #ECECEC;
+    color: #FFF;
     border-radius: 3px;
     margin-bottom: 1em;
     box-sizing: border-box;
+}
+
+label, input, textarea {
+    margin-bottom: 8px;
+}
+
+label, input, textarea {
+    display: block;
+}
+
+input:not(#deleteAccountButton), textarea {
+    border: 1px solid #888;
+    margin: 2px 0 16px 0;
+    outline: 0 none;
+    padding: 0.5em;
+    line-height: 15px;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 4px #ECECEC;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+}
+
+#deleteAccountButton {
+    height: 28px;
+    margin-bottom: 6px;
+}
+
+input {
+    height: 35px;
 }
 
 

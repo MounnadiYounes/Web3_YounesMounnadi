@@ -2,12 +2,16 @@ package ui.controller;
 
 import domain.db.DbException;
 import domain.model.Contact;
+import domain.model.DomainException;
 import domain.model.Person;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,14 +25,13 @@ public class AddContact extends RequestHandler {
         setContactUserId(contact, request, errors);
         setContactFirstName(contact, request, errors);
         setContactLastName(contact, request, errors);
-        setContactDate(contact, request, errors);
-        setContactHour(contact, request, errors);
+        setContactTimestamp(contact, request, errors);
         setContactPhoneNumber(contact, request, errors);
         setContactEmail(contact, request, errors);
 
         if (errors.size() == 0) {
             try {
-                contactService.add(contact);
+                contactTracingService.addContact(contact);
                 return "Controller?command=ContactsOverview";
             } catch (DbException e) {
                 errors.add(e.getMessage());
@@ -43,7 +46,6 @@ public class AddContact extends RequestHandler {
         String userId = person.getUserid();
         try {
             contact.setUserid(userId);
-            request.setAttribute("userIdPrevious", userId);
         } catch (Exception e) {
             errors.add(e.getMessage());
         }
@@ -69,22 +71,33 @@ public class AddContact extends RequestHandler {
         }
     }
 
-    private void setContactDate(Contact contact, HttpServletRequest request, List<String> errors) {
+    private void setContactTimestamp(Contact contact, HttpServletRequest request, List<String> errors) {
         String dateString = request.getParameter("date").trim();
-        try {
-            contact.setDate(LocalDate.parse(dateString));
-            request.setAttribute("datePrevious", dateString);
-        } catch (Exception e) {
-            errors.add(e.getMessage());
-        }
-    }
-
-    private void setContactHour(Contact contact, HttpServletRequest request, List<String> errors) {
         String hourString = request.getParameter("hour").trim();
+        LocalDate date = null;
+        LocalTime hour = null;
+
         try {
-            contact.setHour(LocalTime.parse(hourString));
+            date = LocalDate.parse(dateString);
+            request.setAttribute("datePrevious", dateString);
+        } catch (DateTimeParseException e) {
+            errors.add("No valid date given");
+        }
+
+        try {
+            hour = LocalTime.parse(hourString);
             request.setAttribute("hourPrevious", hourString);
-        } catch (Exception e) {
+        } catch (DateTimeParseException e) {
+            errors.add("No valid hour given");
+        }
+
+        try {
+            if (date != null && hour != null) {
+                LocalDateTime dateTime = LocalDateTime.of(date, hour);
+                Timestamp timestamp = Timestamp.valueOf(dateTime);
+                contact.setTimestamp(timestamp);
+            }
+        } catch (DomainException e) {
             errors.add(e.getMessage());
         }
     }

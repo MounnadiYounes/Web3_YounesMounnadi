@@ -4,7 +4,8 @@ import domain.db.DbException;
 import domain.db.PersonDB;
 import domain.db.PersonDBSQL;
 import domain.model.Person;
-import domain.db.util.Checker;
+import domain.model.Role;
+import util.Checker;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class PersonService {
         if (personId == null) throw new DbException("No id given");
 
         //Exception if person not in db
-        if (!db.personInDb(personId.toLowerCase())) throw new DbException("Person not in database");
+        if (!db.isPersonInDb(personId.toLowerCase())) throw new DbException("Person not in database");
 
         return db.get(personId.toLowerCase());
     }
@@ -33,7 +34,7 @@ public class PersonService {
         if (person == null) throw new DbException("No person given");
 
         //Exception if person in db
-        if (db.personInDb(person.getUserid().toLowerCase())) throw new DbException("User already exists");
+        if (db.isPersonInDb(person.getUserid().toLowerCase())) throw new DbException("User already exists");
 
         // Add person
         db.add(person);
@@ -43,16 +44,15 @@ public class PersonService {
         // Exception if person is null
         if (person == null) throw new DbException("No person given");
 
-        delete(person.getUserid());
-        add(person);
+        db.update(person);
     }
 
-    public void delete(String personId) {
+    public void remove(String personId) {
         // Exception if personId is null
         if (Checker.isEmptyString(personId)) throw new DbException("No id given");
 
         // Exception if person is admin
-        if (Checker.isEmptyString("admin")) throw new DbException("Admin can't be removed");
+        if (get(personId).getRole() == Role.ADMIN) throw new DbException("Admin can't be removed.");
 
         // Remove person in db
         db.remove(personId);

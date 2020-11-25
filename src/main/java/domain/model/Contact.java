@@ -1,28 +1,27 @@
 package domain.model;
 
-import domain.db.util.Checker;
+import util.Checker;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 public class Contact {
     private String userId, firstName, lastName, phoneNumber, email;
-    private LocalDate date;
-    private LocalTime hour;
+    private Timestamp timestamp;
 
     public Contact() {}
 
-    public Contact(String userId, String firstName, String lastName, LocalDate date, LocalTime hour, String phonenumber, String email) {
+    public Contact(String userId, String firstName, String lastName, Timestamp timestamp, String phonenumber, String email) {
         setUserid(userId);
         setFirstName(firstName);
         setLastName(lastName);
-        setDate(date);
-        setHour(hour);
+        setTimestamp(timestamp);
         setPhoneNumber(phonenumber);
         setEmail(email);
     }
 
-    public String getUserid() {
+    public String getUserId() {
         return userId;
     }
 
@@ -66,22 +65,13 @@ public class Contact {
         if (Checker.isValidEmail(email)) this.email = email;
     }
 
-
-    public LocalDate getDate() {
-        return date;
+    public Timestamp getTimestamp() {
+        return timestamp;
     }
 
-    public void setDate(LocalDate date) {
-        if (date == null) throw new DomainException("No date given");
-        this.date = date;
-    }
-
-    public LocalTime getHour() {
-        return hour;
-    }
-
-    public void setHour(LocalTime hour) {
-        if (hour == null) throw new DomainException("No hour given");
-        this.hour = hour;
+    public void setTimestamp(Timestamp timestamp) {
+        if (timestamp == null) throw new DomainException("Date can't be null");
+        if (timestamp.after(Date.valueOf(LocalDate.now()))) throw new DomainException("Date can't be after today");
+        this.timestamp = timestamp;
     }
 }

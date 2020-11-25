@@ -1,4 +1,4 @@
-package domain.db.util;
+package util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,13 +12,14 @@ public class DBConnectionManager {
     private DBConnectionManager(String dbURL) {
         Properties dbProperties = new Properties();
         try {
-            Class.forName("domain.db.util.Secret");  // implementation of abstract class Credentials
+            Class.forName("util.Secret");  // implementation of abstract class Credentials
             Secret.setPass(dbProperties);
         } catch (ClassNotFoundException e) {
             System.out.println("Class Secret with credentials not found!");
         }
         dbProperties.setProperty("ssl", "true");
         dbProperties.setProperty("sslfactory", "org.postgresql.ssl.NonValidatingFactory");
+        //dbProperties.setProperty("sslmode", "true");
         dbProperties.setProperty("sslmode", "require");
 
         try {

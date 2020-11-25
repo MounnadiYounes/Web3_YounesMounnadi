@@ -1,12 +1,10 @@
 package domain.db;
 
 import domain.model.Person;
-import domain.db.util.DbConnectionService;
+import domain.model.Role;
+import util.DbConnectionService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +21,7 @@ public class PersonDBSQL implements PersonDB {
     @Override
     public void add(Person person) {
 
-        String sql = String.format("INSERT INTO %s.person(userid, email, password, firstname, lastname, registerdatetime, lastlogindatetime, amountoftimesloggedin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", schema);
+        String sql = String.format("INSERT INTO %s.person(userid, email, password, firstname, lastname, register, lastlogin, amountoftimesloggedin, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", schema);
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
@@ -32,9 +30,10 @@ public class PersonDBSQL implements PersonDB {
             statementSql.setString(3, person.getPassword());
             statementSql.setString(4, person.getFirstName());
             statementSql.setString(5, person.getLastName());
-            statementSql.setString(6, person.getRegisterDateTimeToString());
-            statementSql.setString(7, person.getlastLoginDateTimeToString());
+            statementSql.setTimestamp(6, person.getRegister());
+            statementSql.setTimestamp(7, person.getLastLogin());
             statementSql.setInt(8, person.getAmountOfTimesLoggedIn());
+            statementSql.setString(9, person.getRole().toString());
             statementSql.execute();
         } catch (SQLException e) {
             throw new DbException(e);
@@ -45,7 +44,7 @@ public class PersonDBSQL implements PersonDB {
     public List<Person> getAll() {
 
         List<Person> people = new ArrayList<>();
-        String sql = String.format("SELECT * FROM %s.person WHERE userid != 'admin'", schema);
+        String sql = String.format("SELECT * FROM %s.person WHERE role != 'ADMIN'", schema);
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
@@ -64,13 +63,13 @@ public class PersonDBSQL implements PersonDB {
     }
 
     @Override
-    public void remove(String personId) {
+    public void remove(String userId) {
 
         String sql = String.format("DELETE FROM %s.person WHERE userid = ?", schema);
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
-            statementSql.setString(1, personId);
+            statementSql.setString(1, userId);
             statementSql.execute();
         } catch (SQLException e) {
             throw new DbException(e);
@@ -78,13 +77,30 @@ public class PersonDBSQL implements PersonDB {
     }
 
     @Override
-    public boolean personInDb(String personId) {
+    public void update(Person person) {
+
+        String sql = String.format("UPDATE %s.person SET password = ?, lastlogin = ?, amountoftimesloggedin = ? WHERE userid = ?", schema);
+
+        try {
+            PreparedStatement statementSql = connection.prepareStatement(sql);
+            statementSql.setString(1, person.getPassword());
+            statementSql.setTimestamp(2, person.getLastLogin());
+            statementSql.setInt(3, person.getAmountOfTimesLoggedIn());
+            statementSql.setString(4, person.getUserid());
+            statementSql.execute();
+        } catch (SQLException e) {
+            throw new DbException(e);
+        }
+    }
+
+    @Override
+    public boolean isPersonInDb(String userId) {
 
         String sql = String.format("SELECT * FROM %s.person WHERE userid = ?", schema);
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
-            statementSql.setString(1, personId);
+            statementSql.setString(1, userId);
             ResultSet result = statementSql.executeQuery();
 
             return result.next();
@@ -94,13 +110,13 @@ public class PersonDBSQL implements PersonDB {
     }
 
     @Override
-    public Person get(String personId) {
+    public Person get(String userId) {
 
         String sql = String.format("SELECT * FROM %s.person WHERE userid = ?", schema);
 
         try {
             PreparedStatement statementSql = connection.prepareStatement(sql);
-            statementSql.setString(1, personId);
+            statementSql.setString(1, userId);
             ResultSet result = statementSql.executeQuery();
             result.next();
 
@@ -111,16 +127,20 @@ public class PersonDBSQL implements PersonDB {
     }
 
     private Person makePerson(ResultSet result) throws SQLException {
-
         String userId = result.getString("userid");
         String email = result.getString("email");
         String password = result.getString("password");
         String firstName = result.getString("firstname");
         String lastName = result.getString("lastname");
-        String registerDateTime = result.getString("registerdatetime");
-        String lastLoginDateTime = result.getString("lastlogindatetime");
+
+        Timestamp register = result.getTimestamp("register");
+        Timestamp lastLogin = result.getTimestamp("lastlogin");
+
         int amountOfTimesLoggedIn = Integer.parseInt(result.getString("amountoftimesloggedin"));
 
-        return new Person(userId, email, password, firstName, lastName, registerDateTime, lastLoginDateTime, amountOfTimesLoggedIn);
+        String roleString = result.getString("role");
+        Role role = Role.valueOf(roleString);
+
+        return new Person(userId, email, password, firstName, lastName, register, lastLogin, amountOfTimesLoggedIn, role);
     }
 }

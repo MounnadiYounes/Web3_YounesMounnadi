@@ -1,4 +1,4 @@
-package domain.db.util;
+package util;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
