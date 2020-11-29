@@ -13,7 +13,7 @@ public class SeleniumWorksWellTest {
 
     @Before
     public void setUp() throws Exception {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\loren\\Google Drive\\Hoge school (UCLL)\\Server stuff\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\youne\\Desktop\\Semester 1\\Webontwikkeling 3\\jars and files\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("https://nl.wikipedia.org/wiki/Hoofdpagina");
     }
