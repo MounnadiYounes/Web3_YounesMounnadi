@@ -13,11 +13,11 @@ import static org.junit.Assert.assertTrue;
 
 public class RegisterTest {
     private WebDriver driver;
-    private String path = "http://localhost:8080/Controller";
+    private String path = "http://localhost:8081/Web3_YounesMounnadi_war_exploded/Controller";
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\loren\\Google Drive\\Hoge school (UCLL)\\Server stuff\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\youne\\Desktop\\Semester 1\\Webontwikkeling 3\\jars and files\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get(path + "?command=Register");
     }

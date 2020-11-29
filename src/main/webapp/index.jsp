@@ -44,7 +44,7 @@
 																			  value="${userIdPrevious}" required></p>
 							<p><label for="password">Your password</label><input type="password" id="password"
 																				 name="password" required></p>
-							<p><input type="submit" id="signUp" value="Log in"></p>
+							<p><input type="submit" id="login" value="Log in"></p>
 						</form>
 					</div>
 				</c:otherwise>
