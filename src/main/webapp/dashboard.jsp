@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Home</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="scripts/app.js" defer></script>
 </head>
 <body>
 <div id="main">
-    <div id="content">
         <jsp:include page="header.jsp">
             <jsp:param name="page" value="Dashboard"/>
         </jsp:include>

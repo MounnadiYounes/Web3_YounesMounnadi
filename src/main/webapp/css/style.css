@@ -4,7 +4,7 @@
     padding: 0;
 }
 
-.alert-danger {
+#alert-danger {
     padding: 0.5em;
     background-color: #f2dede;
     border: 1px solid #000;
@@ -14,7 +14,7 @@
     box-sizing: border-box;
 }
 
-.alert-succes {
+#alert-success {
     padding: 0.5em;
     background-color: #4BB543;
     border: 1px solid #000;
@@ -32,7 +32,8 @@ label, input, textarea {
     display: block;
 }
 
-input:not(#deleteAccountButton), textarea {
+
+input:not(#removeButton), textarea {
     border: 1px solid #888;
     margin: 2px 0 16px 0;
     outline: 0 none;
@@ -42,19 +43,23 @@ input:not(#deleteAccountButton), textarea {
     box-shadow: inset 0 1px 4px #ECECEC;
 }
 
-input[type="submit"] {
-    cursor: pointer;
+input:not(input[type="submit"]) {
+    width: 100%;
+    max-width: 300px;
 }
 
-#deleteAccountButton {
-    height: 28px;
-    margin-bottom: 6px;
+input[type="submit"] {
+    cursor: pointer;
 }
 
 input {
     height: 35px;
 }
 
+#removeButton {
+    height: 28px;
+    margin-bottom: 6px;
+}
 
 /* dingen */
 p {
@@ -235,6 +240,42 @@ input[type=submit]:hover {
     background-color: #f2f2f2;
     padding: 20px;
 }
+
+/**
+Password strengh meter
+*/
+meter {
+    /* Reset the default appearance */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    margin: 0 auto 16px;
+    width: 100%;
+    max-width: 300px;
+    height: 15px;;
+
+    /* Applicable only to Firefox */
+    background: none;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+meter::-webkit-meter-bar {
+    background: none;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Webkit based browsers */
+meter[value="1"]::-webkit-meter-optimum-value { background: red; }
+meter[value="2"]::-webkit-meter-optimum-value { background: yellow; }
+meter[value="3"]::-webkit-meter-optimum-value { background: orange; }
+meter[value="4"]::-webkit-meter-optimum-value { background: green; }
+
+/* Gecko based browsers */
+meter[value="1"]::-moz-meter-bar { background: red; }
+meter[value="2"]::-moz-meter-bar { background: yellow; }
+meter[value="3"]::-moz-meter-bar { background: orange; }
+meter[value="4"]::-moz-meter-bar { background: green; }
 
 /* media */
 @media all and (max-width: 45em) {

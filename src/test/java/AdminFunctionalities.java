@@ -89,7 +89,7 @@ public class AdminFunctionalities {
         boolean found = false;
 
         for (WebElement listItem : listItems) {
-            if (listItem.getAttribute("id").equals("deleteAccountButton")) {
+            if (listItem.getAttribute("id").equals("removeButton")) {
                 found = true;
             }
         }

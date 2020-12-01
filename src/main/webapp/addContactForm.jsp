@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Change password</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="scripts/app.js" defer></script>
 </head>
 <body>
 <div id="main">
@@ -15,7 +16,7 @@
         </jsp:include>
 
             <c:if test="${not empty error}">
-                <div class="alert-danger">
+                <div id="alert-danger">
                     <ul>
                         <li>${error}</li>
                     </ul>

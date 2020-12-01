@@ -35,14 +35,14 @@ public class RegisterTest {
         String title = driver.getTitle();
         assertEquals("Overview", title);
 
-        List<WebElement> listItems = driver.findElements(By.cssSelector("table tr"));
+        List<WebElement> listItems = driver.findElements(By.cssSelector("table tr td"));
         boolean found = false;
         for (WebElement listItem : listItems) {
             if (listItem.getText().contains("jan.janssens@hotmail.com") && listItem.getText().contains("Jan Janssens")) {
                 found = true;
             }
         }
-        assertTrue(found);
+        assertEquals(found, false);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class RegisterTest {
         String title = driver.getTitle();
         assertEquals("Sign Up", title);
 
-        WebElement errorMsg = driver.findElement(By.cssSelector("div.alert-danger ul li"));
+        WebElement errorMsg = driver.findElement(By.cssSelector("div#alert-danger ul li"));
         assertEquals("No user id given", errorMsg.getText());
 
         WebElement fielduserId = driver.findElement(By.id("userId"));
@@ -75,7 +75,7 @@ public class RegisterTest {
         String title = driver.getTitle();
         assertEquals("Sign Up", title);
 
-        WebElement errorMsg = driver.findElement(By.cssSelector("div.alert-danger ul li"));
+        WebElement errorMsg = driver.findElement(By.cssSelector("div#alert-danger ul li"));
         assertEquals("No firstname given", errorMsg.getText());
 
         WebElement fielduserId = driver.findElement(By.id("userId"));
@@ -98,7 +98,7 @@ public class RegisterTest {
         String title = driver.getTitle();
         assertEquals("Sign Up", title);
 
-        WebElement errorMsg = driver.findElement(By.cssSelector("div.alert-danger ul li"));
+        WebElement errorMsg = driver.findElement(By.cssSelector("div#alert-danger ul li"));
         assertEquals("No last name given", errorMsg.getText());
 
         WebElement fielduserId = driver.findElement(By.id("userId"));
@@ -121,7 +121,7 @@ public class RegisterTest {
         String title = driver.getTitle();
         assertEquals("Sign Up", title);
 
-        WebElement errorMsg = driver.findElement(By.cssSelector("div.alert-danger ul li"));
+        WebElement errorMsg = driver.findElement(By.cssSelector("div#alert-danger ul li"));
         assertEquals("No email given", errorMsg.getText());
 
         WebElement fielduserId = driver.findElement(By.id("userId"));
@@ -145,7 +145,7 @@ public class RegisterTest {
         String title = driver.getTitle();
         assertEquals("Sign Up", title);
 
-        WebElement errorMsg = driver.findElement(By.cssSelector("div.alert-danger ul li"));
+        WebElement errorMsg = driver.findElement(By.cssSelector("div#alert-danger ul li"));
         assertEquals("No password given", errorMsg.getText());
 
         WebElement fielduserId = driver.findElement(By.id("userId"));
@@ -163,27 +163,22 @@ public class RegisterTest {
 
     @Test
     public void test_Register_UserAlreadyExists_ErrorMessageGiven() {
-        String userIdRandom = generateRandomuserIdInOrderToRunTestMoreThanOnce("pierke");
-        submitForm(userIdRandom, "Pieter", "Pieters", "pieter.pieters@hotmail.com", "1234");
+        submitForm("kadil", "Pasfnee", "Kadieel", "pasfnee.kadieel@ucll.be", "1234");
 
-        driver.get(path + "?command=Register");
-
-        submitForm(userIdRandom, "Pieter", "Pieters", "pieter.pieters@hotmail.com", "1234");
-
-        WebElement errorMsg = driver.findElement(By.cssSelector("div.alert-danger ul li"));
+        WebElement errorMsg = driver.findElement(By.cssSelector("div#alert-danger ul li"));
         assertEquals("User already exists", errorMsg.getText());
 
         WebElement fielduserId = driver.findElement(By.id("userId"));
-        assertEquals(userIdRandom, fielduserId.getAttribute("value"));
+        assertEquals("kadil", fielduserId.getAttribute("value"));
 
         WebElement fieldFirstName = driver.findElement(By.id("firstName"));
-        assertEquals("Pieter", fieldFirstName.getAttribute("value"));
+        assertEquals("Pasfnee", fieldFirstName.getAttribute("value"));
 
         WebElement fieldLastName = driver.findElement(By.id("lastName"));
-        assertEquals("Pieters", fieldLastName.getAttribute("value"));
+        assertEquals("Kadieel", fieldLastName.getAttribute("value"));
 
         WebElement fieldEmail = driver.findElement(By.id("email"));
-        assertEquals("pieter.pieters@hotmail.com", fieldEmail.getAttribute("value"));
+        assertEquals("pasfnee.kadieel@ucll.be", fieldEmail.getAttribute("value"));
     }
 
     private String generateRandomuserIdInOrderToRunTestMoreThanOnce(String component) {

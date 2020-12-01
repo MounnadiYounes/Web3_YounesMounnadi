@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <title>Overview</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="scripts/app.js" defer></script>
 </head>
 <body>
 <div id="main">
@@ -15,50 +16,64 @@
             <jsp:param name="page" value="Contacts overview"/>
         </jsp:include>
 
-            <c:if test="${not empty testResult}">
-                <p>Your last positive Covid-19 test has been registered on: <fmt:formatDate pattern="dd/MM/yyyy" value="${testResult.date}"/></p>
+        <c:if test="${not empty success}">
+            <div id="alert-success">
+                <ul>
+                    <li><c:out value="${success}"/></li>
+                </ul>
+            </div>
+            <br>
+        </c:if>
+
+        <c:if test="${not empty testResult}">
+            <p>Your last positive Covid-19 test has been registered on: <fmt:formatDate pattern="dd/MM/yyyy" value="${testResult.date}"/></p>
+            <br><br>
+        </c:if>
+
+        <form id="filterForm" action="Controller?command=ContactsOverview" method="POST">
+            <p><label for="fromDate">From: </label><input type="date" id="fromDate" name="fromDate" value="<c:out value="${fromDatePrevious}"/>" required></p>
+            <p><label for="untilDate">Until: </label><input type="date" id="untilDate" name="untilDate" value="<c:out value="${untilDatePrevious}"/>" required></p>
+            <p><input type="submit" id="filter" value="Filter"></p>
+            <a href="Controller?command=ContactsOverview">Clear filter</a>
+        </form>
+
+        <c:choose>
+            <c:when test="${contacts.size() <= 0}">
+                <p id="error">No contacts to show.</p>
                 <br>
-            </c:if>
-
-            <c:choose>
-                <c:when test="${contacts.size() <= 0}">
-                    <p id="error">No contacts to show.</p>
-                    <br>
-                </c:when>
-                <c:otherwise>
-                    <table>
+            </c:when>
+            <c:otherwise>
+                <table>
+                    <tr>
+                        <th>User id</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Date</th>
+                        <th>Hour</th>
+                        <th>Phone number</th>
+                        <th>Email</th>
+                    </tr>
+                    <c:forEach var="contact" items="${contacts}">
                         <tr>
-                            <th>User id</th>
-                            <th>First name</th>
-                            <th>Last name</th>
-                            <th>Date</th>
-                            <th>Hour</th>
-                            <th>Phone number</th>
-                            <th>Email</th>
+                            <td id="userId"><c:out value="${contact.userId}"/></td>
+                            <td><c:out value="${contact.firstName}"/></td>
+                            <td><c:out value="${contact.lastName}"/></td>
+                            <td><fmt:formatDate pattern="dd/MM/yyyy" value="${contact.timestamp}"/></td>
+                            <td><fmt:formatDate pattern="HH:mm" value="${contact.timestamp}"/></td>
+                            <td><c:out value="${contact.phoneNumber}"/></td>
+                            <td><c:out value="${contact.email}"/></td>
                         </tr>
-                        <c:forEach var="contact" items="${contacts}">
-                            <tr>
-                                <td id="userId"><c:out value="${contact.userId}"/></td>
-                                <td><c:out value="${contact.firstName}"/></td>
-                                <td><c:out value="${contact.lastName}"/></td>
-                                <td><fmt:formatDate pattern="dd/MM/yyyy" value="${contact.timestamp}"/></td>
-                                <td><fmt:formatDate pattern="HH:mm" value="${contact.timestamp}"/></td>
-                                <td><c:out value="${contact.phoneNumber}"/></td>
-                                <td><c:out value="${contact.email}"/></td>
-                            </tr>
-                        </c:forEach>
-                        <caption>Contacts Overview</caption>
-                    </table>
-                </c:otherwise>
-            </c:choose>
+                    </c:forEach>
+                    <caption>Contacts Overview</caption>
+                </table>
+            </c:otherwise>
+        </c:choose>
 
-            <c:if test="${user.userid ne 'admin'}">
-                <div>
-                    <form method="POST" action="Controller?command=AddContactForm">
-                        <p><input type="submit" id="addContact" value="Add contact"></p>
-                    </form>
-                </div>
-            </c:if>
+        <c:if test="${user.userid ne 'admin'}">
+            <form method="POST" action="Controller?command=AddContactForm">
+                <p><input type="submit" id="addContact" value="Add contact"></p>
+            </form>
+        </c:if>
     <footer> &copy; Webontwikkeling 3, UC Leuven-Limburg</footer>
 </div>
 </body>

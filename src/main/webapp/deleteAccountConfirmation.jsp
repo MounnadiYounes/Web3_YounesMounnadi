@@ -7,9 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Change password</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="scripts/app.js" defer></script>
 </head>
 <body>
-<div id="main">
+    <div id="main">
         <jsp:include page="header.jsp">
             <jsp:param name="page" value="Delete account"/>
         </jsp:include>
@@ -22,7 +23,7 @@
                 <p><input type="submit" id="yes" name="yes" value="Yes, delete this account"></p>
             </form>
         </div>
-    <footer> &copy; Webontwikkeling 3, UC Leuven-Limburg</footer>
-</div>
+        <footer> &copy; Webontwikkeling 3, UC Leuven-Limburg</footer>
+    </div>
 </body>
 </html>
