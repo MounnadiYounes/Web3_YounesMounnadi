@@ -35,6 +35,8 @@ public class Controller extends HttpServlet {
                 destination = "error.jsp";
             }
         }
-        request.getRequestDispatcher(destination).forward(request, response);
+        if (!response.isCommitted())  {
+            request.getRequestDispatcher(destination).forward(request, response);
+        }
     }
 }
