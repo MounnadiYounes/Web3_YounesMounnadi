@@ -15,7 +15,7 @@ public class Login extends RequestHandler {
 
         try {
             String userId = request.getParameter("userId").trim();
-            Person person = contactTracingService.getPerson(userId);
+            Person person = contactTracingService.getPersonService().get(userId);
 
             if (person != null && person.isCorrectPassword(request.getParameter("password").trim())) {
                 Checker.loginUser(request, person, contactTracingService);
@@ -28,7 +28,7 @@ public class Login extends RequestHandler {
             }
         } catch (DbException e) {
             System.out.println("Log: someone tried to log in but entered a wrong user id.");
-            request.setAttribute("error", "user id of password is niet correct ingevuld.");
+            request.setAttribute("error", e.getMessage());
         }
 
         return "Controller?command=Home";
