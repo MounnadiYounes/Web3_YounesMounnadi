@@ -33,16 +33,7 @@ public class RegisterTest {
         submitForm(userIdRandom, "Jan", "Janssens", "jan.janssens@hotmail.com", "1234");
 
         String title = driver.getTitle();
-        assertEquals("Overview", title);
-
-        List<WebElement> listItems = driver.findElements(By.cssSelector("table tr td"));
-        boolean found = false;
-        for (WebElement listItem : listItems) {
-            if (listItem.getText().contains("jan.janssens@hotmail.com") && listItem.getText().contains("Jan Janssens")) {
-                found = true;
-            }
-        }
-        assertEquals(found, false);
+        assertEquals("Contacts overview", title);
     }
 
     @Test
@@ -76,7 +67,7 @@ public class RegisterTest {
         assertEquals("Sign Up", title);
 
         WebElement errorMsg = driver.findElement(By.cssSelector("div#alert-danger ul li"));
-        assertEquals("No firstname given", errorMsg.getText());
+        assertEquals("No first name given", errorMsg.getText());
 
         WebElement fielduserId = driver.findElement(By.id("userId"));
         assertEquals("jakke", fielduserId.getAttribute("value"));
