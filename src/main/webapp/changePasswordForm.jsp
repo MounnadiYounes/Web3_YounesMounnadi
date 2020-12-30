@@ -10,6 +10,7 @@
     <script src="scripts/app.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
     <script src="scripts/passwordStrengthMeter.js" defer></script>
+    <script src="scripts/formValidation.js" defer></script>
 </head>
 <body>
 <div id="main">
@@ -24,18 +25,20 @@
                     </ul>
                 </div>
             </c:if>
-        <div class="container">
-            <form method="POST" action="Controller?command=ChangePasswordConfirmation">
-                <p><label for="currentPassword">Current password</label><input type="password" id="currentPassword" name="currentPassword" required></p>
 
-                <p><label for="newPassword">New password</label><input type="password" id="password" name="newPassword" required></p>
+        <div class="container">
+            <form method="POST" action="Controller?command=ChangePasswordConfirmation" novalidate>
+                <div><p><label for="currentPassword">Current password</label><input type="password" id="currentPassword" name="currentPassword" required></p></div>
+
+                <div><p><label for="newPassword">New password</label><input type="password" id="newPassword" name="newPassword" required></p></div>
                 <p>Password strength: <span id="password-strength-text">please enter a password</span></p>
                 <meter max="4" id="password-strength-meter"></meter>
 
-                <p><label for="newPasswordConfirmation">New password confirmation</label><input type="password" id="newPasswordConfirmation" name="newPasswordConfirmation" required></p>
+                <div><p><label for="newPasswordConfirmation">New password confirmation</label><input type="password" id="newPasswordConfirmation" name="newPasswordConfirmation" required></p></div>
                 <p><input type="submit" id="changePassword" value="Change password"></p>
             </form>
         </div>
+
     <footer>&copy; Webontwikkeling 3, UC Leuven-Limburg</footer>
 </div>
 </body>
