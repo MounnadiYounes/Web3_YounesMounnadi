@@ -39,9 +39,9 @@
             <c:otherwise>
 
                 <form id="filterForm" action="Controller?command=ContactsOverview" method="POST" novalidate>
-                    <p><label for="fromDate">From </label><input type="date" id="fromDate" name="fromDate" value="<c:out value="${fromDatePrevious}"/>" required></p>
-                    <p><label for="untilDate">Until </label><input type="date" id="untilDate" name="untilDate" value="<c:out value="${untilDatePrevious}"/>" required></p>
-                    <p><input type="submit" id="filter" value="Filter"></p>
+                    <div><p><label for="fromDate">From </label><input type="date" id="fromDate" name="fromDate" value="<c:out value="${fromDatePrevious}"/>" required></p></div>
+                    <div><p><label for="untilDate">Until </label><input type="date" id="untilDate" name="untilDate" value="<c:out value="${untilDatePrevious}"/>" required></p></div>
+                    <div><p><input type="submit" id="filter" value="Filter"></p></div>
                     <a href="Controller?command=ContactsOverview">Clear filter</a>
                 </form>
 

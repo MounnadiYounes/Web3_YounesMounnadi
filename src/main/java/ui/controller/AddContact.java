@@ -39,6 +39,7 @@ public class AddContact extends RequestHandler {
             }
         }
         request.setAttribute("errors", errors);
+        System.out.println(errors);
         return "Controller?command=AddContactForm";
     }
 

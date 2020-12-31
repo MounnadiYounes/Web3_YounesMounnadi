@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 public abstract class Page {
 
     WebDriver driver;
-    String path = "http://localhost:8080/Controller";
+    String path = "http://localhost:8081/Web3_YounesMounnadi_war_exploded/Controller";
 
     public Page (WebDriver driver) {
         this.driver = driver;

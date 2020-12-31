@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+h2 {
+    padding: 8px 0;
+}
+
 #alert-danger {
     padding: 0.5em;
     background-color: #f2dede;
@@ -54,6 +58,7 @@ input[type="submit"] {
 
 input {
     height: 35px;
+    max-width: 200px;
 }
 
 #removeButton {
@@ -61,10 +66,21 @@ input {
     margin-bottom: 6px;
 }
 
-table {display: block;
-    max-width: fit-content;
-    overflow-x: auto;
+table {
+    display: block;
+    border: none;
     white-space: nowrap;
+    border-collapse: collapse;
+    overflow-x: auto;
+    margin-bottom: 16px;
+}
+
+table tbody {
+    max-width: 100%;
+}
+
+table caption {
+    display: none;
 }
 
 form > div {
@@ -73,7 +89,7 @@ form > div {
 }
 
 form span.error {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     margin-left: 16px;
     align-self: flex-end;
     font-size: 0.9em;
@@ -103,16 +119,10 @@ img {
     max-width: 100%;
 }
 
-table, td, th {
+td, th {
     border: 1px solid black;
     text-align: center;
 }
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
 
 
 /* main */
@@ -136,6 +146,9 @@ header {
     list-style: none!important;
 }
 
+ul {
+    list-style-type: none;
+}
 
 li a {
     font-size: 16px;
@@ -186,7 +199,7 @@ body {
 #main {
     min-height: 70vh;
     margin: 0 auto 5em auto;
-    max-width: 40em;
+    max-width: 960px;
 }
 
 footer {
@@ -203,10 +216,7 @@ footer {
 /* contact formulier */
 th, td {
     text-align: left;
-}
-th:not(:last-of-type), td:not(:last-of-type) {
-    padding: 0.6em 3.6em 0 0;
-    text-align: left;
+    padding: 0.6em;
     vertical-align: top;
 }
 

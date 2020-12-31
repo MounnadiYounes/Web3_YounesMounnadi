@@ -75,7 +75,6 @@ public class AdminFunctionalities {
         Set<String> userIds = new HashSet<>();
 
         for (WebElement contactUserId: contactsUserIds) {
-            System.out.println(contactUserId.getText());
             userIds.add(contactUserId.getText());
         }
         return userIds.size() > 1;

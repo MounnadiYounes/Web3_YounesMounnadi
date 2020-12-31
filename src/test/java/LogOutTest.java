@@ -1,3 +1,4 @@
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.NoSuchElementException;
@@ -17,7 +18,7 @@ import static org.junit.Assert.assertTrue;
 
 public class LogOutTest {
     private WebDriver driver;
-    private String path = "http://localhost:8080/";
+    private String path = "http://localhost:8081/Web3_YounesMounnadi_war_exploded/";
 
     @Before
     public void setUp() {
@@ -25,19 +26,19 @@ public class LogOutTest {
         driver = new ChromeDriver();
     }
 
-//    @After
-//    public void clean() {
-//        driver.quit();
-//    }
+    @After
+    public void clean() {
+        driver.quit();
+    }
 
     @Test
     public void test_LoggedInUserLogsOut_IndexPageShownWithLogInForm() {
         //Register and log in
         RegisterPage registerPage = PageFactory.initElements(driver, RegisterPage.class);
-        registerPage.setUserIdRegisterField("testuser");
-        registerPage.setFirstNameRegisterField("Test");
-        registerPage.setLastNameRegisterField("User");
-        registerPage.setEmailRegisterField("Test.User@gmail.com");
+        registerPage.setUserIdRegisterField("test");
+        registerPage.setFirstNameRegisterField("test");
+        registerPage.setLastNameRegisterField("test");
+        registerPage.setEmailRegisterField("test@ucll.be");
         registerPage.setPasswordRegisterField("t");
         registerPage.submitRegister();
         IndexPage indexPage = PageFactory.initElements(driver, IndexPage.class);

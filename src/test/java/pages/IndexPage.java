@@ -36,6 +36,6 @@ public class IndexPage extends Page{
     }
 
     public boolean hasLogInForm() {
-        return driver.findElement(By.name("logInForm")) != null;
+        return driver.findElement(By.id("login")) != null;
     }
 }
